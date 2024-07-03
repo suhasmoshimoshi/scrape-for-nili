@@ -18,13 +18,14 @@ app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
 function getBrowserLaunchOptions() {
-  const executablePath = puppeteer.executablePath();
   return {
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    executablePath,
+    executablePath: process.env.CHROME_BIN || '/usr/bin/google-chrome-stable',
     headless: 'new',
+    timeout: 120000, // Increase the launch timeout to 60 seconds
   };
 }
+
 
 async function scrapeEvents() {
   const browser = await puppeteer.launch(getBrowserLaunchOptions());
