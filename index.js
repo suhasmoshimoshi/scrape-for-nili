@@ -27,13 +27,12 @@ function getBrowserLaunchOptions() {
         '--disable-dev-shm-usage',
         '--single-process'
       ],
-      executablePath: '/usr/bin/chromium-browser',
-      headless: true
+      headless: 'new'
     };
   } else {
     return {
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
-      headless: true
+      headless: 'new'
     };
   }
 }
