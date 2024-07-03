@@ -21,15 +21,9 @@ app.listen(port, () => {
 function getBrowserLaunchOptions() {
   if (process.env.RENDER) {
     return {
-      args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--single-process'
-      ],
-      executablePath: '/usr/bin/google-chrome-stable',
-      headless: 'new'
-    
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      executablePath: process.env.CHROME_BIN || '/usr/bin/google-chrome-stable',
+      headless: 'new',
     };
   } else {
     return {
