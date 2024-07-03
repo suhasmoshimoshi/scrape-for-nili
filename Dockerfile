@@ -14,6 +14,7 @@ RUN apt-get update \
 
 # Verify the Chrome installation path
 RUN which google-chrome-stable
+RUN google-chrome-stable --version
 
 # Set the working directory in the container
 WORKDIR /app

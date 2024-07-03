@@ -17,20 +17,13 @@ app.get('/', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
-
 function getBrowserLaunchOptions() {
-  if (process.env.RENDER) {
-    return {
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-      executablePath: process.env.CHROME_BIN || '/usr/bin/google-chrome-stable',
-      headless: 'new',
-    };
-  } else {
-    return {
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-      headless: 'new'
-    };
-  }
+  const executablePath = puppeteer.executablePath();
+  return {
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    executablePath,
+    headless: 'new',
+  };
 }
 
 async function scrapeEvents() {
