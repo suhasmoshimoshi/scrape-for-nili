@@ -18,12 +18,28 @@ app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
 
+function getBrowserLaunchOptions() {
+  if (process.env.RENDER) {
+    return {
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--single-process'
+      ],
+      executablePath: '/usr/bin/chromium-browser',
+      headless: true
+    };
+  } else {
+    return {
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      headless: true
+    };
+  }
+}
+
 async function scrapeEvents() {
-  const browser = await puppeteer.launch({
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    headless: true,
-    executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/google-chrome-stable'
-  });
+  const browser = await puppeteer.launch(getBrowserLaunchOptions());
   const page = await browser.newPage();
 
   try {
