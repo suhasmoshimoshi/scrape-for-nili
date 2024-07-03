@@ -27,6 +27,7 @@ function getBrowserLaunchOptions() {
         '--disable-dev-shm-usage',
         '--single-process'
       ],
+      executablePath: process.env.CHROME_BIN || null,
       headless: 'new'
     };
   } else {
