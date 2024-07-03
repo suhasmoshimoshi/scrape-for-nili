@@ -27,8 +27,9 @@ function getBrowserLaunchOptions() {
         '--disable-dev-shm-usage',
         '--single-process'
       ],
-      executablePath: process.env.CHROME_BIN || null,
+      executablePath: '/usr/bin/google-chrome-stable',
       headless: 'new'
+    
     };
   } else {
     return {
